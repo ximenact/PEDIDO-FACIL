@@ -1,7 +1,6 @@
 PedidoFácil
 
-Descripción
-PedidoFácil es una aplicación web desarrollada con Django para gestionar productos y pedidos de manera organizada. Permite administrar la información registrada y consultar los datos desde una interfaz web.
+es una aplicación web desarrollada con Django para gestionar productos y pedidos de manera organizada. Permite administrar la información registrada y consultar los datos desde una interfaz web.
 
 Funcionalidades
 - Inicio y cierre de sesión.
