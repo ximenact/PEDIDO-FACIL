@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | PedidoFácil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'productos:lista' %}">PedidoFácil</a>
+            <div class="d-flex gap-3 align-items-center">
+                <a class="text-white" href="{% url 'productos:lista' %}">Productos</a>
+                <a class="text-white" href="{% url 'pedidos:lista' %}">Pedidos</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags|default:'info' }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Productos</h1>
+            <a href="{% url 'productos:crear' %}" class="btn btn-primary">Nuevo producto</a>
+        </div>
+
+        <form method="get" class="row g-2 mb-4">
+            <div class="col-sm-9">
+                <input type="search" name="q" class="form-control"
+                       placeholder="Buscar por nombre o descripción" value="{{ busqueda }}">
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-outline-primary w-100">Buscar</button>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad disponible</th>
+                        <th>Fecha de registro</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.descripcion }}</td>
+                            <td>${{ producto.precio }}</td>
+                            <td>{{ producto.cantidad_disponible }}</td>
+                            <td>{{ producto.fecha_registro|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <a href="{% url 'productos:editar' producto.pk %}"
+                                   class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{% url 'productos:eliminar' producto.pk %}"
+                                   class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center">No hay productos registrados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
