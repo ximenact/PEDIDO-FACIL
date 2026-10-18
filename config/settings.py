@@ -17,12 +17,9 @@ SECRET_KEY = 'django-insecure-uwtp+m%793tst--qe1b!ka2@vk65z!=4ook$tf(1hrk_yr))6@
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv(
-        'ALLOWED_HOSTS',
-        'localhost,127.0.0.1'
-    ).split(',')
-    if host.strip()
+    'pedido-facil-55ew.onrender.com',
+    'localhost',
+    '127.0.0.1',
 ]
 
 
