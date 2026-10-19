@@ -82,6 +82,9 @@
                                    class="btn btn-warning btn-sm">Editar</a>
                                 <a href="{% url 'pedidos:eliminar' pedido.pk %}"
                                    class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{% url 'pedidos:detalle' pedido.pk %}"
+                                    class="btn btn-sm btn-outline-danger">Ver detalle</a>
+
                             </td>
                         </tr>
                     {% empty %}

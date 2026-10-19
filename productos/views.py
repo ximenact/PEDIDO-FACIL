@@ -27,6 +27,15 @@ def lista_productos(request):
 
 
 @login_required
+def detalle_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+
+    return render(request, 'productos/detalle.html', {
+        'producto': producto,
+    })
+
+
+@login_required
 def crear_producto(request):
     form = ProductoForm(request.POST or None)
 

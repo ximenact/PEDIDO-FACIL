@@ -30,6 +30,18 @@ def lista_pedidos(request):
 
 
 @login_required
+def detalle_pedido(request, pk):
+    pedido = get_object_or_404(
+        Pedido.objects.select_related('usuario'),
+        pk=pk
+    )
+
+    return render(request, 'pedidos/detalle.html', {
+        'pedido': pedido,
+    })
+
+
+@login_required
 def crear_pedido(request):
     form = PedidoForm(request.POST or None)
 

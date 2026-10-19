@@ -15,6 +15,7 @@ class Pedido(models.Model):
         max_length=50,
         unique=True
     )
+    
     cliente = models.CharField(
         max_length=150,
         validators=[MinLengthValidator(3)]

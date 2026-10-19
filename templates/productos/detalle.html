@@ -1,0 +1,82 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="mb-4">
+        <a href="{% url 'productos:lista' %}"
+           class="btn btn-outline-secondary">
+            &larr; Volver a productos
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 mx-auto"
+         style="max-width: 800px;">
+
+        <div class="card-header text-white p-4"
+             style="background-color: #e75480;">
+            <h2 class="mb-1">Detalle del producto</h2>
+            <p class="mb-0">Información completa del producto</p>
+        </div>
+
+        <div class="card-body p-4">
+
+            <h3 class="fw-bold mb-4">{{ producto.nombre }}</h3>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <div class="p-3 rounded-3 bg-light h-100">
+                        <small class="text-muted">Precio</small>
+                        <h4 class="mt-2 mb-0">
+                            ${{ producto.precio }}
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-3 rounded-3 bg-light h-100">
+                        <small class="text-muted">
+                            Cantidad disponible
+                        </small>
+                        <h4 class="mt-2 mb-0">
+                            {{ producto.cantidad_disponible }}
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <h5 class="fw-bold mt-3">Descripción</h5>
+                    <p class="text-muted">
+                        {{ producto.descripcion|default:"Sin descripción registrada" }}
+                    </p>
+                </div>
+
+                <div class="col-12">
+                    <h5 class="fw-bold">Fecha de registro</h5>
+                    <p class="text-muted">
+                        {{ producto.fecha_registro|date:"d/m/Y H:i" }}
+                    </p>
+                </div>
+
+            </div>
+
+            <hr class="my-4">
+
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{% url 'productos:editar' producto.pk %}"
+                   class="btn btn-danger">
+                    Editar producto
+                </a>
+
+                <a href="{% url 'productos:lista' %}"
+                   class="btn btn-outline-secondary">
+                    Volver al listado
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

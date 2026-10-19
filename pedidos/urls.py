@@ -7,6 +7,7 @@ app_name = 'pedidos'
 urlpatterns = [
     path('', views.lista_pedidos, name='lista'),
     path('crear/', views.crear_pedido, name='crear'),
+    path('<int:pk>/detalle/', views.detalle_pedido, name='detalle'),
     path('editar/<int:pk>/', views.editar_pedido, name='editar'),
     path('eliminar/<int:pk>/', views.eliminar_pedido, name='eliminar'),
 ]
